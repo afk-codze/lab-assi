@@ -53,6 +53,15 @@ You can replace a text with a clickable link to `movies_path` by using the follo
 ```
 <%= link_to "desired_text", movies_path() %>
 ```
+#### Link to and movie path are helper methods.
+In Ruby on Rails, helpers are methods that are designed to make it easier to build views by providing reusable snippets of code that can be invoked in your templates. Helpers can encapsulate anything from simple formatting tasks, like formatting dates or numbers, to more complex logic, such as generating forms or links dynamically. Rails comes with a wide array of built-in helper methods, and you can also define your own custom helper methods.
+
+``` <%= link_to "desired_text", movies_path %> ```
+This line uses the link_to helper, which is one of Rails' built-in view helpers. The link_to helper creates an HTML anchor (<a>) tag that links to a specified URL. Here's how it works in the context of your example:
+
+* *First Argument ("desired_text"):* This is the text that will be displayed as the link in the view. Users will see "desired_text" as the clickable link text.
+* *Second Argument (movies_path):* This is a URL helper that generates the path to the movies index page. The movies_path helper method returns a string with the path /movies, which is used as the href attribute of the <a> tag.
+* *Output:* The resulting HTML output in the view would be <a href="/movies">desired_text</a>, where /movies is the URL to the index page of movies, and "desired_text" is the link text.
 
 You can customize the call to `movies_path` along the lines of the suggestions given earlier in this guide.
 
@@ -63,6 +72,22 @@ You can customize the call to `movies_path` along the lines of the suggestions g
 * *Self-check:* What route (URI and HTTP verb) triggers that action, and what route helper method would generate that route for you?  (Hint: use `rake routes`)
 
 > The route is `GET /movies` and the helper method is `movies_path` (no arguments). 
+
+Using  ``` rails routes ```
+the output looks like this:
+```
+    Prefix Verb   URI Pattern                Controller#Action
+    movies GET    /movies(.:format)          movies#index
+           POST   /movies(.:format)          movies#create
+ new_movie GET    /movies/new(.:format)      movies#new
+edit_movie GET    /movies/:id/edit(.:format) movies#edit
+     movie GET    /movies/:id(.:format)      movies#show
+           PATCH  /movies/:id(.:format)      movies#update
+           PUT    /movies/:id(.:format)      movies#update
+           DELETE /movies/:id(.:format)      movies#destroy
+      root GET    /                          redirect(301, /movies)
+```
+The reason you don't see a separate named route like movie_path specifically listed next to each route in the output is because of the convention Rails follows for RESTful resources. The Prefix column gives you the base name of the helper methods, and the actual method names are derived from this base by appending _path or _url for path and URL helpers, respectively. Additionally, for actions that operate on a specific instance (like show, update, edit, destroy), you pass the instance (or its ID) as an argument to the helper method, e.g., ```movie_path(@movie)``` or ```movie_path(1)```
 
 **Note:** Don't put code in your views! The view shouldn't have to sort the collection itself - its job is just to show stuff. The controller should spoon-feed the view exactly what is to be displayed.
 
