@@ -24,6 +24,10 @@ At the top of the Movies listing, add checkboxes that allow the user to filter t
 
 We provide below the Embedded Ruby code that generates the checkboxes form. This should be included in the `index.html.erb` view for Movie:
 
+questo form comunica con la action index del controller movies che invoca movie_path
+se il rating è selezionato (ovvero si trova nella variabile @selected_ratings), il checkbox è spuntato
+tramite il bottone refresh viene inviata òa richiesta al movie controller con i parametri selezionati
+
 ```
 <%= form_tag movies_path, method: :get, id: 'ratings_form' do %>
   Show (all if none selected):
@@ -92,6 +96,8 @@ While we cannot pass it directly as value for a route element, we can extract it
 You can assign this array to an instance variable `@linkto_ratings` and *appropriately* add it to the `movies_path` method call from `link_to`. The goal is to have the information about which checkboxes were checked on the form appears as part of the sorting route.
 
 At this point, you should be able to sort the movies while retaining the filtering settings.
+
+
 
 ### Saving both preferences in the `session`
 
