@@ -93,6 +93,12 @@ Upon refreshing the view with newly applied filtering settings, the view will kn
 
 While we cannot pass it directly as value for a route element, we can extract its `keys` and then write a code (better, call an ad-hoc method of Ruby that you can find by judiciously using Google) that builds an array of `[key, value]` pairs with `1` as value for all the `key` values in `keys`. Note that `keys` can be called also on an empty hash.
 
+--> il metodo ad-hoc messo a disposizione da rails è: ActionController::Parameters.to_h:
+```
+<%= link_to "Title", movies_path(sort_order: :title, ratings: @selected_ratings.to_h { |rating| [rating, 1] }) %>
+```
+, ratings: @selected_ratings.to_h { |rating| [rating, 1] }
+
 You can assign this array to an instance variable `@linkto_ratings` and *appropriately* add it to the `movies_path` method call from `link_to`. The goal is to have the information about which checkboxes were checked on the form appears as part of the sorting route.
 
 At this point, you should be able to sort the movies while retaining the filtering settings.
