@@ -97,11 +97,12 @@ You can assign this array to an instance variable `@linkto_ratings` and *appropr
 
 At this point, you should be able to sort the movies while retaining the filtering settings.
 
+###Spiegazione: 
 Quando costruisci link (link_to) o invii form, puoi passare parametri che includono hash, ma devi farlo in modo che sia compatibile con le aspettative di Rails:
 
-Nei Link: Quando costruisci un link che deve mantenere lo stato attuale dei filtri (ad esempio, i rating selezionati), non puoi passare direttamente un oggetto ActionController::Parameters perché Rails 5+ lo tratta in modo speciale per motivi di sicurezza. Tuttavia, puoi costruire un hash dei parametri che desideri passare (ad esempio, trasformando params[:ratings] in un formato adatto) e utilizzarlo nel tuo helper link_to.
+* Nei Link: Quando costruisci un link che deve mantenere lo stato attuale dei filtri (ad esempio, i rating selezionati), non puoi passare direttamente un oggetto ActionController::Parameters perché Rails 5+ lo tratta in modo speciale per motivi di sicurezza. Tuttavia, puoi costruire un hash dei parametri che desideri passare (ad esempio, trasformando params[:ratings] in un formato adatto) e utilizzarlo nel tuo helper link_to.
 
-Nei Form: I dati del form vengono automaticamente gestiti quando il form viene inviato, e puoi strutturare i nomi degli input del form in modo che Rails costruisca automaticamente gli hash basati sulla tua input. Ad esempio, usando check_box_tag "ratings[#{rating}]" permette di inviare i ratings selezionati come parte di un hash ratings in params.
+* Nei Form: I dati del form vengono automaticamente gestiti quando il form viene inviato, e puoi strutturare i nomi degli input del form in modo che Rails costruisca automaticamente gli hash basati sulla tua input. Ad esempio, usando check_box_tag "ratings[#{rating}]" permette di inviare i ratings selezionati come parte di un hash ratings in params.
 
 ### Saving both preferences in the `session`
 
