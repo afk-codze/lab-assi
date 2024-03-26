@@ -97,7 +97,6 @@ While we cannot pass it directly as value for a route element, we can extract it
 ```
 <%= link_to "Title", movies_path(sort_order: :title, ratings: @selected_ratings.to_h { |rating| [rating, 1] }) %>
 ```
-, ratings: @selected_ratings.to_h { |rating| [rating, 1] }
 
 You can assign this array to an instance variable `@linkto_ratings` and *appropriately* add it to the `movies_path` method call from `link_to`. The goal is to have the information about which checkboxes were checked on the form appears as part of the sorting route.
 
